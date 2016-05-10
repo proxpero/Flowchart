@@ -6,13 +6,14 @@
 //  Copyright © 2016 Todd Olsen. All rights reserved.
 //
 
+import Swift
+
 public protocol DecisionType {
 
     associatedtype T
 
-    var lhs: T { get }
-    var rhs: T { get }
-    var op: (T, T) -> Bool { get }
+    var value: T { get }
+    var op: (T) -> Bool { get }
 
     func evaluation() -> Bool
 
@@ -21,7 +22,7 @@ public protocol DecisionType {
 extension DecisionType {
 
     public func evaluation() -> Bool {
-        return op(lhs, rhs)
+        return op(value)
     }
 
 }
@@ -29,14 +30,12 @@ extension DecisionType {
 
 public struct PrimitiveDecision: DecisionType {
 
-    public let lhs: Int
-    public let rhs: Int
-    public let op: (Int, Int) -> Bool
+    public let value: Int
+    public let op: (Int) -> Bool
 
     // Why isn't the memberwise initializer getting synthesized for me?
-    public init(lhs: Int, rhs: Int, op: (Int, Int) -> Bool) {
-        self.lhs = lhs
-        self.rhs = rhs
+    public init(value: Int, op: (Int) -> Bool) {
+        self.value = value
         self.op  = op
     }
 
@@ -45,15 +44,44 @@ public struct PrimitiveDecision: DecisionType {
 
 public struct CompositeDecision: DecisionType {
 
-    public let lhs: PrimitiveDecision
-    public let rhs: PrimitiveDecision
-    public let op: (PrimitiveDecision, PrimitiveDecision) -> Bool
+    public let value: PrimitiveDecision
+    public let op: (PrimitiveDecision) -> Bool
 
     // Why isn't the memberwise initializer getting synthesized for me?
-    public init(lhs: PrimitiveDecision, rhs: PrimitiveDecision, op: (PrimitiveDecision, PrimitiveDecision) -> Bool) {
-        self.lhs = lhs
-        self.rhs = rhs
+    public init(value: PrimitiveDecision, op: (PrimitiveDecision) -> Bool) {
+        self.value = value
         self.op  = op
+    }
+
+}
+
+public protocol OperatorType {
+    associatedtype T
+    var operation: (T) -> Bool { get }
+}
+
+public enum PrimitiveOperator: OperatorType {
+
+    case isEqualToZero
+    case isEven
+
+    public var operation: (Int) -> Bool {
+        switch self {
+        case .isEqualToZero: return { x in x == 0 }
+        case .isEven: return { x in x % 2 == 0 }
+        }
+    }
+
+}
+
+public enum CompositeOperator: OperatorType {
+
+    case Not
+
+    public var operation: (PrimitiveDecision) -> Bool {
+        switch self {
+        case .Not: return { x in !x.evaluation() }
+        }
     }
 
 }
