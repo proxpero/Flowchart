@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:FlowchartLogic/FlowchartLogic.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Flowchart/Flowchart.xcodeproj">
    </FileRef>
 </Workspace>
