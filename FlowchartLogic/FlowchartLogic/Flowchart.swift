@@ -6,8 +6,18 @@
 //  Copyright © 2016 Todd Olsen. All rights reserved.
 //
 
-struct Flowchart {
+public struct Flowchart<A> {
 
+    private let transform: (A) -> A
 
+    public init(transform: A -> A) {
+        self.transform = transform
+    }
+
+    public func evaluate(n: A) -> A {
+        return transform(n)
+    }
 
 }
+
+
