@@ -29,10 +29,17 @@ extension DecisionType {
 
 public struct PrimitiveDecision: DecisionType {
 
-    public let
-    lhs: Bool
-    public let rhs: Bool
-    public let op: (Bool, Bool) -> Bool
+    public let lhs: Int
+    public let rhs: Int
+    public let op: (Int, Int) -> Bool
+
+    // Why isn't the memberwise initializer getting synthesized for me?
+    public init(lhs: Int, rhs: Int, op: (Int, Int) -> Bool) {
+        self.lhs = lhs
+        self.rhs = rhs
+        self.op  = op
+    }
+
 
 }
 
@@ -41,5 +48,12 @@ public struct CompositeDecision: DecisionType {
     public let lhs: PrimitiveDecision
     public let rhs: PrimitiveDecision
     public let op: (PrimitiveDecision, PrimitiveDecision) -> Bool
+
+    // Why isn't the memberwise initializer getting synthesized for me?
+    public init(lhs: PrimitiveDecision, rhs: PrimitiveDecision, op: (PrimitiveDecision, PrimitiveDecision) -> Bool) {
+        self.lhs = lhs
+        self.rhs = rhs
+        self.op  = op
+    }
 
 }
