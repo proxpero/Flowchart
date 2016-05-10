@@ -6,7 +6,7 @@
 //  Copyright © 2016 Todd Olsen. All rights reserved.
 //
 
-protocol DecisionType {
+public protocol DecisionType {
 
     associatedtype T
 
@@ -20,25 +20,26 @@ protocol DecisionType {
 
 extension DecisionType {
 
-    func evaluation() -> Bool {
+    public func evaluation() -> Bool {
         return op(lhs, rhs)
     }
 
 }
 
 
-struct PrimitiveDecision: DecisionType {
+public struct PrimitiveDecision: DecisionType {
 
-    let lhs: Bool
-    let rhs: Bool
-    let op: (Bool, Bool) -> Bool
+    public let
+    lhs: Bool
+    public let rhs: Bool
+    public let op: (Bool, Bool) -> Bool
 
 }
 
-struct CompositeDecision: DecisionType {
+public struct CompositeDecision: DecisionType {
 
-    let lhs: PrimitiveDecision
-    let rhs: PrimitiveDecision
-    let op: (PrimitiveDecision, PrimitiveDecision) -> Bool
+    public let lhs: PrimitiveDecision
+    public let rhs: PrimitiveDecision
+    public let op: (PrimitiveDecision, PrimitiveDecision) -> Bool
 
 }
