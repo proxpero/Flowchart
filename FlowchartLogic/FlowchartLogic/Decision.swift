@@ -8,80 +8,111 @@
 
 import Swift
 
-public protocol DecisionType {
+public struct Decision {
 
-    associatedtype T
+    private let operation: (Int -> Bool)
 
-    var value: T { get }
-    var op: (T) -> Bool { get }
+    public init(operation: Int -> Bool) {
+        self.operation = operation
+    }
 
-    func evaluation() -> Bool
-
-}
-
-extension DecisionType {
-
-    public func evaluation() -> Bool {
-        return op(value)
+    public func evaluatate(input: Int) -> Bool {
+        return operation(input)
     }
 
 }
 
 
-public struct PrimitiveDecision: DecisionType {
-
-    public let value: Int
-    public let op: (Int) -> Bool
-
-    // Why isn't the memberwise initializer getting synthesized for me?
-    public init(value: Int, op: (Int) -> Bool) {
-        self.value = value
-        self.op  = op
-    }
-
-
-}
-
-public struct CompositeDecision: DecisionType {
-
-    public let value: PrimitiveDecision
-    public let op: (PrimitiveDecision) -> Bool
-
-    // Why isn't the memberwise initializer getting synthesized for me?
-    public init(value: PrimitiveDecision, op: (PrimitiveDecision) -> Bool) {
-        self.value = value
-        self.op  = op
-    }
-
-}
-
-public protocol OperatorType {
-    associatedtype T
-    var operation: (T) -> Bool { get }
-}
-
-public enum PrimitiveOperator: OperatorType {
-
-    case isEqualToZero
-    case isEven
-
-    public var operation: (Int) -> Bool {
-        switch self {
-        case .isEqualToZero: return { x in x == 0 }
-        case .isEven: return { x in x % 2 == 0 }
-        }
-    }
-
-}
-
-public enum CompositeOperator: OperatorType {
-
-    case Not
-
-    public var operation: (PrimitiveDecision) -> Bool {
-        switch self {
-        case .Not: return { x in !x.evaluation() }
-        }
-    }
-
-}
+//public protocol DecisionType {
+//
+//    associatedtype T
+//
+//    var value: T { get }
+//    var op: (T) -> Bool { get }
+//
+//    func evaluation() -> Bool
+//
+//}
+//
+//extension DecisionType {
+//
+//    public func evaluation() -> Bool {
+//        return op(value)
+//    }
+//
+//}
+//
+//
+//
+//
+//public struct Decision<A>: DecisionType {
+//    public let value: A
+//    public let op: (A) -> Bool
+//
+//    public init(value: A, op: (A) -> Bool) {
+//        self.value = value
+//        self.op = op
+//    }
+//}
+//
+//extension DecisionType where T == Int {
+//
+//    func and(other: Self) -> Bool {
+//        return self.evaluation() && other.evaluation()
+//    }
+//
+//}
+//
+//public protocol OperatorType {
+//    associatedtype T
+//    var operation: (T) -> Bool { get }
+//}
+//
+//extension OperatorType where T == Decision<Int> {
+//
+//    func and(lhs: T, rhs: T) -> Bool {
+//        return lhs.evaluation() && rhs.evaluation()
+//    }
+//
+//}
+//
+//extension OperatorType where T: DecisionType {
+//
+//    func and(lhs: T, rhs: T) -> Bool {
+//        return lhs.evaluation() && rhs.evaluation()
+//    }
+//
+//    func or(lhs: T, rhs: T) -> Bool {
+//        return lhs.evaluation() || rhs.evaluation()
+//    }
+//
+//    
+//}
+//
+//
+//
+//public enum PrimitiveOperator: OperatorType {
+//
+//    case isEqualToZero
+//    case isEven
+//
+//    public var operation: (Int) -> Bool {
+//        switch self {
+//        case .isEqualToZero: return { x in x == 0 }
+//        case .isEven: return { x in x % 2 == 0 }
+//        }
+//    }
+//
+//}
+//
+//public enum CompositeOperator<A where A: DecisionType> {
+//
+//    case Not
+//
+//    public var operation: (A) -> Bool {
+//        switch self {
+//        case .Not: return { x in !x.evaluation() }
+//        }
+//    }
+//
+//}
