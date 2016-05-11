@@ -11,10 +11,11 @@ import UIKit
 class DecisionLibraryViewController: UICollectionViewController {
 
     var decisions: [Decision] = [
-        Decision(operation: { x in x % 2 == 0 }, title: "Is Even?"),
-        Decision(operation: { x in x == 0 }, title: "Is equal to 0?")
+        Decision.IsEven,
+        Decision.IsEqualTo(0),
+        Decision.IsLessThan(0),
+        Decision.IsGreaterThan(0)
     ]
-
 
     var didSelectDecision: (Decision) -> () = { _ in }
 
@@ -24,6 +25,10 @@ class DecisionLibraryViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DecisionCell", forIndexPath: indexPath) as? DecisionCell else { fatalError() }
+        cell.layer.borderColor = UIColor.Steel.CGColor
+        cell.layer.borderWidth = 1.0
+        cell.layer.cornerRadius = 5.0
+        cell.backgroundColor = UIColor.Mercury
         return decisions[indexPath.row].configure(cell)
     }
 
@@ -31,20 +36,17 @@ class DecisionLibraryViewController: UICollectionViewController {
         didSelectDecision(decisions[indexPath.row])
     }
 
-
 }
 
 class DecisionCell: UICollectionViewCell {
-
     @IBOutlet weak var label: UILabel!
-
 }
 
 
 extension Decision {
 
     func configure(cell: DecisionCell) -> DecisionCell {
-        cell.label.text = self.title
+        cell.label.text = self.title.stringByReplacingOccurrencesOfString(" {Input} ", withString: " ")
         return cell
     }
 
