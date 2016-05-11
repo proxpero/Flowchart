@@ -8,23 +8,40 @@
 
 import UIKit
 
-class FlowChartViewController: UIViewController {
+class FlowChartViewController: UIViewController, SegueHandlerType {
 
-    @IBOutlet weak var libraryView: UIStackView!
+    var decisions = [
+        Decision(operation: { x in x % 2 == 0 }, title: "Is Even")
+    ]
+    var flowcharts: [Flowchart] = []
+    var processes: [Process] = []
 
+    enum SegueIdentifier: String {
+        case Decision = "DecisionViewControllerSegueIdentifier"
+    }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
-
-
-
-
-
-    @IBAction func toggleLibraryAction(sender: UIButton) {
-
-        UIView.animateWithDuration(0.3) {
-            self.libraryView.hidden = !self.libraryView.hidden
+        switch segueIdentifierForSegue(segue) {
+        case .Decision:
+            guard let vc = segue.destinationViewController as? DecisionLibraryViewController else { fatalError() }
+            vc.decisions = decisions
+            vc.didSelectDecision = didSelectDecision
         }
 
+    }
+
+    func didSelectDecision(decision: Decision) {
+        
+    }
+
+    @IBOutlet weak var decisionLibrary: UIView!
+
+    @IBAction func decisionViewAction(sender: AnyObject) {
+
+        UIView.animateWithDuration(0.3) {
+            self.decisionLibrary.hidden = !self.decisionLibrary.hidden
+        }
     }
     
 }
