@@ -10,6 +10,17 @@ import UIKit
 
 class FlowChartViewController: UIViewController, SegueHandlerType {
 
+    @IBOutlet weak var nameField: UITextField!
+    @IBAction func nameEditingDidEnd(sender: UITextField) {
+        if let title = sender.text where !title.isEmpty {
+            flowchart = Flowchart(
+                decision: flowchart.decision,
+                yes: flowchart.yes,
+                no: flowchart.no,
+                title: title)
+        }
+    }
+
     @IBOutlet weak var inputField: UITextField!
     @IBOutlet weak var outputField: UITextField!
 
@@ -18,9 +29,9 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
     }
 
     var flowchart = Flowchart(
-        decision: Decision.IsEven,
-        yes: Process(transformation: { x in x - 1 }),
-        no:  Process(transformation: { x in x + 1 })
+        decision: Decision.IsEqualTo(5),
+        yes: Process(transformation: { x in x - 1 }, title: "Decrement"),
+        no:  Process(transformation: { x in x + 1 }, title: "Increment")
     ) {
         didSet {
             evaluate()
@@ -35,20 +46,93 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
         {
             let output = flowchart.transform(n)
             outputField.text = String(output)
+            processTrueVC.isChosen = flowchart.decision.evaluate(n) == true
+            processFalseVC.isChosen = flowchart.decision.evaluate(n) == false
+            
+        }
+
+    }
+
+    var decisionVC: DecisionViewController!
+    var processTrueVC: ProcessViewController!
+    var processFalseVC: ProcessViewController!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        for v in [nameField, inputField, outputField] {
+            v.layer.cornerRadius = 5.0
+            v.layer.borderColor = UIColor.Steel.CGColor
+            v.layer.borderWidth = 1.0
+            
         }
 
     }
 
     enum SegueIdentifier: String {
         case Decision = "DecisionViewControllerSegueIdentifier"
+        case ProcessTrue = "ProcessTrueViewControllerSegueIdentifier"
+        case ProcessFalse = "ProcessFalseViewControllerSegueIdentifier"
+        case DecisionLibrary = "DecisionLibraryViewControllerSegueIdentifier"
+        case ProcessLibrary = "ProcessLibraryViewControllerSegueIdentifier"
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         switch segueIdentifierForSegue(segue) {
+            
         case .Decision:
+            guard let vc = segue.destinationViewController as? DecisionViewController else { fatalError() }
+            vc.decision = flowchart.decision
+            vc.toggleDecisionLibrary = {
+                UIView.animateWithDuration(0.3) {
+                    self.decisionLibrary.hidden = !self.decisionLibrary.hidden
+                }
+            }
+            vc.updateCallback = { decision in
+                self.flowchart = Flowchart(
+                    decision: decision,
+                    yes: self.flowchart.yes,
+                    no: self.flowchart.no,
+                    title: self.flowchart.title
+                )
+            }
+            decisionVC = vc
+
+        case .ProcessTrue:
+            guard let vc = segue.destinationViewController as? ProcessViewController else { fatalError() }
+            vc.direction = .True
+            vc.block = flowchart.yes
+            processTrueVC = vc
+            
+        case .ProcessFalse:
+            guard let vc = segue.destinationViewController as? ProcessViewController else { fatalError() }
+            vc.direction = .False
+            vc.block = flowchart.no
+            processFalseVC = vc
+            
+        case .DecisionLibrary:
             guard let vc = segue.destinationViewController as? DecisionLibraryViewController else { fatalError() }
-            vc.didSelectDecision = didSelectDecision
+
+            vc.didSelectDecision = { decision in
+                switch decision {
+                case .IsEven:
+                    self.decisionVC.inputField.hidden = true
+                default:
+                    self.decisionVC.inputField.hidden = false
+                }
+                self.decisionVC.label.text = decision.title
+
+                self.flowchart = Flowchart(
+                    decision: decision,
+                    yes: self.flowchart.yes,
+                    no: self.flowchart.no,
+                    title: self.flowchart.title
+                )
+            }
+
+        case .ProcessLibrary:
+            guard let vc = segue.destinationViewController as? ProcessLibraryViewController else { fatalError() }
+            
         }
 
     }
@@ -60,27 +144,6 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
 
     @IBOutlet weak var decisionLabel: UILabel!
     @IBOutlet weak var decisionInput: UITextField!
-
-    func didSelectDecision(decision: Decision) {
-
-        switch decision {
-        case .IsEven:
-            decisionInput.hidden = true
-        default:
-            decisionInput.hidden = false
-        }
-
-        decisionLabel.text = decision.title
-        setDecision(decision)
-    }
-
-    @IBAction func decisionInputDidEndEditing(sender: UITextField) {
-
-        // A lens would make this nicer
-
-        setDecision(flowchart.decision)
-        
-    }
 
     func setDecision(decision: Decision) {
 
@@ -105,13 +168,16 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
 
     @IBOutlet weak var decisionLibrary: UIView!
 
-    @IBAction func decisionViewAction(sender: AnyObject) {
+//    @IBAction func decisionViewAction(sender: AnyObject) {
+//
+//        UIView.animateWithDuration(0.3) {
+//            self.decisionLibrary.hidden = !self.decisionLibrary.hidden
+//        }
+//    }
 
-        UIView.animateWithDuration(0.3) {
-            self.decisionLibrary.hidden = !self.decisionLibrary.hidden
-        }
-    }
-    
+    @IBOutlet weak var yesLabel: UILabel!
+    @IBOutlet weak var noLabel: UILabel!
+
 }
 
 
