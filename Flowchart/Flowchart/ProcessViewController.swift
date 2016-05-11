@@ -71,6 +71,12 @@ class ProcessViewController: UIViewController {
         descriptionView.text = block.title
     }
 
+    var toggleProcessLibrary: () -> () = { }
+
+    @IBAction func didRecognizeTapGesture(sender: UITapGestureRecognizer) {
+        toggleProcessLibrary()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()

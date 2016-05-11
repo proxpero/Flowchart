@@ -149,6 +149,7 @@
                         <outlet property="inputField" destination="ugw-1x-cak" id="hgO-oX-8nN"/>
                         <outlet property="nameField" destination="OOv-09-8MP" id="zr9-ed-DQx"/>
                         <outlet property="outputField" destination="M6Y-NM-7gW" id="WqF-99-QLD"/>
+                        <outlet property="processLibrary" destination="peh-nV-ZKN" id="t5o-UA-tMC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -293,9 +294,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="560" height="118"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oP9-FE-gvU">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oP9-FE-gvU">
                                 <rect key="frame" x="0.0" y="38" width="60" height="41"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="41" placeholder="YES" id="4NU-k0-ryM"/>
                                     <constraint firstAttribute="width" constant="60" id="Y4c-iU-Axm"/>
                                 </constraints>
                             </imageView>
@@ -321,6 +323,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="oP9-FE-gvU" firstAttribute="leading" secondItem="ppy-TH-i5O" secondAttribute="leading" id="1Qf-eU-Jo8"/>
                             <constraint firstItem="oP9-FE-gvU" firstAttribute="centerY" secondItem="ppy-TH-i5O" secondAttribute="centerY" id="32T-np-idL"/>
@@ -329,6 +332,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="KPG-P4-kgD" secondAttribute="trailing" id="tPn-IP-i63"/>
                             <constraint firstAttribute="bottomMargin" secondItem="KPG-P4-kgD" secondAttribute="bottom" id="uqV-ET-6B5"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0bo-Tf-Fjg" appends="YES" id="Fqp-7K-40O"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="captionView" destination="GRQ-Ox-h9z" id="4ul-dP-FfS"/>
@@ -337,6 +343,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lv-FF-70m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0bo-Tf-Fjg">
+                    <connections>
+                        <action selector="didRecognizeTapGesture:" destination="8eP-FI-esi" id="coI-gP-SlQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="956" y="364"/>
         </scene>

@@ -101,6 +101,11 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
         case .ProcessTrue:
             guard let vc = segue.destinationViewController as? ProcessViewController else { fatalError() }
             vc.direction = .True
+            vc.toggleProcessLibrary = {
+                UIView.animateWithDuration(0.3) {
+                    self.processLibrary.hidden = !self.processLibrary.hidden
+                }
+            }
             vc.block = flowchart.yes
             processTrueVC = vc
             
@@ -167,6 +172,7 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
     }
 
     @IBOutlet weak var decisionLibrary: UIView!
+    @IBOutlet weak var processLibrary: UIView!
 
 //    @IBAction func decisionViewAction(sender: AnyObject) {
 //
