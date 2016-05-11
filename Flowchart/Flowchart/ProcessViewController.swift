@@ -13,15 +13,6 @@ enum ControlFlowDirection {
     case True
     case False
 
-//    var image: UIImage {
-//        switch self {
-//        case .True:
-//            return UIImage(named: "Check")!
-//        case .False:
-//            return UIImage(named: "Cross")!
-//        }
-//    }
-
     var caption: String {
         switch self {
         case .True:
@@ -85,4 +76,6 @@ class ProcessViewController: UIViewController {
         view.layer.borderWidth = 1.0
         view.backgroundColor = UIColor.Mercury
     }
+
+    
 }

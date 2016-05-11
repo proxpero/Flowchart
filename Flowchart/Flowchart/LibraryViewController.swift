@@ -1,5 +1,5 @@
 //
-//  DecisionLibraryViewController.swift
+//  LibraryViewController.swift
 //  Flowchart
 //
 //  Created by Todd Olsen on 5/10/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DecisionLibraryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class LibraryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var decisions: [Decision] = [
         Decision.IsEven,
@@ -24,7 +24,7 @@ class DecisionLibraryViewController: UIViewController, UICollectionViewDelegate,
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("DecisionCell", forIndexPath: indexPath) as? DecisionCell else { fatalError() }
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LibraryCell", forIndexPath: indexPath) as? LibraryCell else { fatalError() }
         cell.layer.borderColor = UIColor.whiteColor().CGColor
         cell.layer.borderWidth = 1.0
         cell.layer.cornerRadius = 5.0
@@ -45,14 +45,14 @@ class DecisionLibraryViewController: UIViewController, UICollectionViewDelegate,
 
 }
 
-class DecisionCell: UICollectionViewCell {
+class LibraryCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
 }
 
 
 extension Decision {
 
-    func configure(cell: DecisionCell) -> DecisionCell {
+    func configure(cell: LibraryCell) -> LibraryCell {
         cell.label.text = self.title
         return cell
     }
