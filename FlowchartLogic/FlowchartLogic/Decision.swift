@@ -8,7 +8,43 @@
 
 import Swift
 
-public struct Decision {
+public enum Decision {
+
+    case IsEven
+    case IsEqualTo(Int)
+    case IsLessThan(Int)
+    case IsGreaterThan(Int)
+
+    public func evaluate(input: Int) -> Bool {
+        switch self {
+        case .IsEven:
+            return input % 2 == 0
+        case .IsEqualTo(let x):
+            return input == x
+        case .IsLessThan(let x):
+            return input < x
+        case .IsGreaterThan(let x):
+            return input > x
+        }
+    }
+
+    public var title: String {
+        switch self {
+        case .IsEven:
+            return "Is Even?"
+        case .IsEqualTo(_):
+            return "Is Equal To?"
+        case .IsLessThan(_):
+            return "Is Less Than?"
+        case .IsGreaterThan(_):
+            return "Is Greater Than?"
+        }
+    }
+
+    
+}
+
+public struct Decision_ {
 
     public let title: String
 
@@ -19,7 +55,7 @@ public struct Decision {
         self.operation = operation
     }
 
-    public func evaluatate(input: Int) -> Bool {
+    public func evaluate(input: Int) -> Bool {
         return operation(input)
     }
 
