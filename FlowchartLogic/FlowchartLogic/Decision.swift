@@ -41,6 +41,32 @@ public enum Decision {
         }
     }
 
+
+    public func decisionWithValue(n: Int) -> Decision {
+        switch self {
+        case .IsEqualTo:
+            return Decision.IsEqualTo(n)
+        case .IsLessThan:
+            return Decision.IsLessThan(n)
+        case .IsGreaterThan:
+            return Decision.IsGreaterThan(n)
+        default:
+            fatalError()
+        }
+    }
+
+    mutating public func setValueInPlace(n: Int) {
+        switch self {
+        case .IsEqualTo:
+            self = Decision.IsEqualTo(n)
+        case .IsLessThan:
+            self = Decision.IsLessThan(n)
+        case .IsGreaterThan:
+            self = Decision.IsGreaterThan(n)
+        default:
+            ()
+        }
+    }
     
 }
 
