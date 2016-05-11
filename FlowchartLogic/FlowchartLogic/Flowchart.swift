@@ -15,9 +15,9 @@ public struct Flowchart : Block {
 
     public let title: String
 
-    private let decision: Decision
-    private let yes: Block
-    private let no: Block
+    let decision: Decision
+    let yes: Block
+    let no: Block
 
     public init(decision: Decision, yes: Block, no: Block, title: String = "Flowchart") {
         self.title = title
@@ -27,7 +27,7 @@ public struct Flowchart : Block {
     }
 
     public func transform(input: Int) -> Int {
-        return decision.evaluatate(input) ? yes.transform(input) : no.transform(input)
+        return decision.evaluate(input) ? yes.transform(input) : no.transform(input)
     }
 
 }
