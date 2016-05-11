@@ -10,9 +10,6 @@ import UIKit
 
 class FlowChartViewController: UIViewController, SegueHandlerType {
 
-    var decisions = [
-        Decision(operation: { x in x % 2 == 0 }, title: "Is Even")
-    ]
     var flowcharts: [Flowchart] = []
     var processes: [Process] = []
 
@@ -25,13 +22,16 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
         switch segueIdentifierForSegue(segue) {
         case .Decision:
             guard let vc = segue.destinationViewController as? DecisionLibraryViewController else { fatalError() }
-            vc.decisions = decisions
             vc.didSelectDecision = didSelectDecision
         }
 
     }
 
+
+    @IBOutlet weak var decisionLabel: UILabel!
+
     func didSelectDecision(decision: Decision) {
+        decisionLabel.text = decision.title
         
     }
 

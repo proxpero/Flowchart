@@ -10,12 +10,13 @@ import UIKit
 
 class DecisionLibraryViewController: UICollectionViewController {
 
+    var decisions: [Decision] = [
+        Decision(operation: { x in x % 2 == 0 }, title: "Is Even?"),
+        Decision(operation: { x in x == 0 }, title: "Is equal to 0?")
+    ]
+
+
     var didSelectDecision: (Decision) -> () = { _ in }
-    var decisions: [Decision] = [] {
-        didSet {
-            collectionView?.reloadData()
-        }
-    }
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return decisions.count
