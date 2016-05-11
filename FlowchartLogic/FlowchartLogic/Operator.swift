@@ -6,11 +6,3 @@
 //  Copyright © 2016 Todd Olsen. All rights reserved.
 //
 
-protocol Operator {
-
-    
-
-    
-
-
-}

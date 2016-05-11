@@ -10,9 +10,12 @@ import Swift
 
 public struct Decision {
 
+    public let title: String
+
     private let operation: (Int -> Bool)
 
-    public init(operation: Int -> Bool) {
+    public init(operation: Int -> Bool, title: String = "Decision") {
+        self.title = title
         self.operation = operation
     }
 

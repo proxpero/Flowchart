@@ -393,6 +393,7 @@
 				5228FF7F1CE22D0C0090270E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5228FF801CE22D0C0090270E /* Build configuration list for PBXNativeTarget "FlowchartLogicTests" */ = {
 			isa = XCConfigurationList;
@@ -401,6 +402,7 @@
 				5228FF821CE22D0C0090270E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

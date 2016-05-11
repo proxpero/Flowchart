@@ -2,7 +2,8 @@ import FlowchartLogic
 
 //let input = 5
 
-let isEven = Decision(operation: { x in x % 2 == 0 })
+let isEven = Decision(operation: { x in x % 2 == 0 }, title: "Is Even")
+
 //let increment = Process(transformation: { x in x + 1 })
 //let decrement = Process(transformation: { x in x - 1 })
 
@@ -35,3 +36,4 @@ while input != 1 {
     input = _collatz.transform(input)
 }
 input
+
