@@ -110,9 +110,8 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             guard let vc = segue.destinationViewController as? DecisionViewController else { fatalError() }
             vc.decision = flowchart.decision
             vc.toggleDecisionLibrary = {
-                UIView.animateWithDuration(0.3) {
-                    self.decisionLibrary.hidden = !self.decisionLibrary.hidden
-                }
+                self.decisionLibrary.hidden = !self.decisionLibrary.hidden
+                self.activeProcess = nil
             }
             vc.updateCallback = { decision in
                 self.flowchart = Flowchart(
@@ -147,14 +146,10 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             guard let vc = segue.destinationViewController as? ProcessViewController else { fatalError() }
             vc.direction = .False
             vc.toggleProcessLibrary = {
-                UIView.animateWithDuration(0.3) {
-
-                    if self.activeProcess == nil {
-                        self.activeProcess = .False
-                    } else {
-                        self.activeProcess = nil
-                    }
-
+                if self.activeProcess == nil {
+                    self.activeProcess = .False
+                } else {
+                    self.activeProcess = nil
                 }
             }
             vc.block = flowchart.no
