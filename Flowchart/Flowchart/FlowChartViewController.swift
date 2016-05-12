@@ -167,6 +167,8 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             vc.didSelectItem = { decision in
                 guard let decision = decision as? Decision else { fatalError() }
                 switch decision {
+                case .True:
+                    self.decisionVC.inputField.hidden = true
                 case .IsEven:
                     self.decisionVC.inputField.hidden = true
                 default:
