@@ -96,37 +96,6 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
         case ProcessLibrary = "ProcessLibraryViewControllerSegueIdentifier"
     }
 
-    private var activeProcess: ControlFlowDirection? {
-        didSet {
-
-            if activeProcess == nil {
-
-                self.processLibrary.hidden = true
-                self.processFalseView.layer.borderWidth = 0.0
-                self.processFalseView.layer.borderColor = nil
-                self.processTrueView.layer.borderWidth = 0.0
-                self.processTrueView.layer.borderColor = nil
-
-            } else if activeProcess! == .True {
-
-                self.processLibrary.hidden = false
-                self.processTrueView.layer.borderWidth = 3.0
-                self.processTrueView.layer.borderColor = UIColor.blueColor().CGColor
-                self.processFalseView.layer.borderWidth = 0.0
-                self.processFalseView.layer.borderColor = nil
-
-            } else {
-
-                self.processLibrary.hidden = false
-                self.processFalseView.layer.borderWidth = 3.0
-                self.processFalseView.layer.borderColor = UIColor.blueColor().CGColor
-                self.processTrueView.layer.borderWidth = 0.0
-                self.processTrueView.layer.borderColor = nil
-
-            }
-        }
-    }
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         switch segueIdentifierForSegue(segue) {
@@ -278,6 +247,38 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
         self.flowchart = Flowchart(decision: newDecision, yes: flowchart.yes, no: flowchart.no)
 
     }
+
+    private var activeProcess: ControlFlowDirection? {
+        didSet {
+
+            if activeProcess == nil {
+
+                self.processLibrary.hidden = true
+                self.processFalseView.layer.borderWidth = 0.0
+                self.processFalseView.layer.borderColor = nil
+                self.processTrueView.layer.borderWidth = 0.0
+                self.processTrueView.layer.borderColor = nil
+
+            } else if activeProcess! == .True {
+
+                self.processLibrary.hidden = false
+                self.processTrueView.layer.borderWidth = 3.0
+                self.processTrueView.layer.borderColor = UIColor.blueColor().CGColor
+                self.processFalseView.layer.borderWidth = 0.0
+                self.processFalseView.layer.borderColor = nil
+
+            } else {
+
+                self.processLibrary.hidden = false
+                self.processFalseView.layer.borderWidth = 3.0
+                self.processFalseView.layer.borderColor = UIColor.blueColor().CGColor
+                self.processTrueView.layer.borderWidth = 0.0
+                self.processTrueView.layer.borderColor = nil
+                
+            }
+        }
+    }
+
 
     @IBOutlet weak var processTrueView: UIView!
     @IBOutlet weak var processFalseView: UIView!
