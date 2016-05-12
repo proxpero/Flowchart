@@ -28,15 +28,20 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             processLibraryVC.tableView.reloadData()
         }
 
+        decisionVC.updateUI()
+        processTrueVC.updateUI()
+        processFalseVC.updateUI()
+        nameField.text = self.flowchart.title
+        inputField.text = "0"
+        decisionVC.decision = Decision.True
+        processTrueVC.block = Process.init(transformation: { x in x }, title: "Identity")
+        processFalseVC.block = Process.init(transformation: { x in x }, title: "Identity")
+
         self.flowchart = Flowchart(
             decision: Decision.True,
             yes: Process(transformation: { x in x }, title: "Identity"),
             no: Process(transformation: { x in x }, title: "Identity")
         )
-        
-        decisionVC.updateUI()
-        processTrueVC.updateUI()
-        processFalseVC.updateUI()
 
     }
 

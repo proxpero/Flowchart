@@ -130,13 +130,13 @@
                                     <constraint firstItem="tPg-Nt-FhX" firstAttribute="height" secondItem="jSd-Ms-uUh" secondAttribute="height" id="tnw-w4-xCn"/>
                                 </constraints>
                             </stackView>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="FOa-0b-SQT">
+                            <containerView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="FOa-0b-SQT">
                                 <rect key="frame" x="20" y="427" width="560" height="173"/>
                                 <connections>
                                     <segue destination="QH4-8R-9F3" kind="embed" identifier="DecisionLibraryViewControllerSegueIdentifier" id="Jij-M3-10X"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="peh-nV-ZKN">
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="300" translatesAutoresizingMaskIntoConstraints="NO" id="peh-nV-ZKN">
                                 <rect key="frame" x="20" y="427" width="560" height="173"/>
                                 <connections>
                                     <segue destination="QH4-8R-9F3" kind="embed" identifier="ProcessLibraryViewControllerSegueIdentifier" id="Z8b-Co-hMh"/>

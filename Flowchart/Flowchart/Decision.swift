@@ -25,9 +25,9 @@ public enum Decision: CustomTitleConvertible {
         case .IsEqualTo(let x):
             return input == x
         case .IsLessThan(let x):
-            return input < x
-        case .IsGreaterThan(let x):
             return input > x
+        case .IsGreaterThan(let x):
+            return input < x
         }
     }
 
@@ -58,7 +58,8 @@ public enum Decision: CustomTitleConvertible {
         case .IsGreaterThan:
             return Decision.IsGreaterThan(n)
         default:
-            fatalError()
+            print("Warning! Possibly unexpected result")
+            return self
         }
     }
 
