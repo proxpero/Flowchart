@@ -63,19 +63,6 @@ public enum Decision: CustomTitleConvertible {
         }
     }
 
-    mutating public func setValueInPlace(n: Int) {
-        switch self {
-        case .IsEqualTo:
-            self = Decision.IsEqualTo(n)
-        case .IsLessThan:
-            self = Decision.IsLessThan(n)
-        case .IsGreaterThan:
-            self = Decision.IsGreaterThan(n)
-        default:
-            ()
-        }
-    }
-
     static var store = [
         Decision.True,
         Decision.IsEven,
