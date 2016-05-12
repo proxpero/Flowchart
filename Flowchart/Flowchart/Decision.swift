@@ -25,9 +25,9 @@ public enum Decision: CustomTitleConvertible {
         case .IsEqualTo(let x):
             return input == x
         case .IsLessThan(let x):
-            return input > x
-        case .IsGreaterThan(let x):
             return input < x
+        case .IsGreaterThan(let x):
+            return input > x
         }
     }
 

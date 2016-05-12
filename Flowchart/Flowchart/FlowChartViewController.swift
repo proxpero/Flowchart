@@ -31,7 +31,7 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
         decisionVC.updateUI()
         processTrueVC.updateUI()
         processFalseVC.updateUI()
-        nameField.text = self.flowchart.title
+        nameField.text = "My New Flowchart"
         inputField.text = "0"
         decisionVC.decision = Decision.True
         processTrueVC.block = Process.init(transformation: { x in x }, title: "Identity")
@@ -164,18 +164,10 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
 
             guard let vc = segue.destinationViewController as? LibraryViewController else { fatalError() }
             vc.items = [("Decisions", Decision.store.map { $0 as LibraryCellConfigurator })]
-            vc.didSelectItem = { decision in
-                guard let decision = decision as? Decision else { fatalError() }
-                switch decision {
-                case .True:
-                    self.decisionVC.inputField.hidden = true
-                case .IsEven:
-                    self.decisionVC.inputField.hidden = true
-                default:
-                    self.decisionVC.inputField.hidden = false
-                }
-                self.decisionVC.label.text = decision.title
+            vc.didSelectItem = { cellConfig in
+                guard let decision = cellConfig as? Decision else { fatalError() }
 
+                self.decisionVC.decision = decision
                 self.flowchart = Flowchart(
                     decision: decision,
                     yes: self.flowchart.yes,
