@@ -8,32 +8,38 @@
 
 import UIKit
 
-class LibraryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var decisions: [Decision] = [
-        Decision.IsEven,
-        Decision.IsEqualTo(0),
-        Decision.IsLessThan(0),
-        Decision.IsGreaterThan(0)
-    ]
+    @IBOutlet weak var tableView: UITableView!
+
+    var items: Array<(title: String, configurators: [LibraryCellConfigurator])> = []
     
-    var didSelectDecision: (Decision) -> () = { _ in }
+    var didSelectItem: (LibraryCellConfigurator) -> () = { _ in }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return decisions.count
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return items.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier("LibraryCell", forIndexPath: indexPath) as? LibraryCell else { fatalError() }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return items[section].title
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items[section].configurators.count
+    }
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("LibraryCell") as? LibraryCell else { fatalError() }
         cell.layer.borderColor = UIColor.whiteColor().CGColor
         cell.layer.borderWidth = 1.0
         cell.layer.cornerRadius = 5.0
         cell.backgroundColor = UIColor.Mercury
-        return decisions[indexPath.row].configure(cell)
+        let item = items[indexPath.section].configurators[indexPath.row]
+        return item.configure(cell)
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        didSelectDecision(decisions[indexPath.row])
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        didSelectItem(items[indexPath.section].configurators[indexPath.row])
     }
 
     override func viewDidLoad() {
@@ -45,16 +51,19 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
 
 }
 
-class LibraryCell: UICollectionViewCell {
-    @IBOutlet weak var label: UILabel!
+public class LibraryCell: UITableViewCell { }
+
+protocol LibraryCellConfigurator {
+    func configure(cell: LibraryCell) -> LibraryCell
 }
 
-
-extension Decision {
-
+extension LibraryCellConfigurator where Self: CustomTitleConvertible {
     func configure(cell: LibraryCell) -> LibraryCell {
-        cell.label.text = self.title
+        cell.textLabel?.text = self.title
         return cell
     }
-
 }
+
+extension Decision: LibraryCellConfigurator { }
+extension Process: LibraryCellConfigurator { }
+extension Flowchart: LibraryCellConfigurator { }
