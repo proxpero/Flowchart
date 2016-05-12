@@ -10,48 +10,6 @@ import UIKit
 
 class FlowChartViewController: UIViewController, SegueHandlerType {
 
-    @IBOutlet weak var nameField: UITextField!
-    @IBAction func nameEditingDidEnd(sender: UITextField) {
-        if let title = sender.text where !title.isEmpty {
-            flowchart = Flowchart(
-                decision: flowchart.decision,
-                yes: flowchart.yes,
-                no: flowchart.no,
-                title: title)
-        }
-    }
-    @IBAction func addFlowchartAction(sender: UIButton) {
-
-        if Flowchart.store.filter({ $0.title == title }).count == 0 {
-            Flowchart.store.append(flowchart)
-            processLibraryVC.items[1].configurators = processLibraryVC.items[1].configurators + [flowchart]
-            processLibraryVC.tableView.reloadData()
-        }
-
-        decisionVC.updateUI()
-        processTrueVC.updateUI()
-        processFalseVC.updateUI()
-        nameField.text = "My New Flowchart"
-        inputField.text = "0"
-        decisionVC.decision = Decision.True
-        processTrueVC.block = Process.init(transformation: { x in x }, title: "Identity")
-        processFalseVC.block = Process.init(transformation: { x in x }, title: "Identity")
-
-        self.flowchart = Flowchart(
-            decision: Decision.True,
-            yes: Process(transformation: { x in x }, title: "Identity"),
-            no: Process(transformation: { x in x }, title: "Identity")
-        )
-
-    }
-
-    @IBOutlet weak var inputField: UITextField!
-    @IBOutlet weak var outputField: UITextField!
-
-    @IBAction func inputEditingDidEnd(sender: UITextField) {
-        evaluate()
-    }
-
     var flowchart = Flowchart(
         decision: Decision.IsEqualTo(5),
         yes: Process(transformation: { x in x - 1 }, title: "Decrement"),
@@ -63,7 +21,6 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
     }
 
     func evaluate() {
-
         outputField.text = ""
         if let s = inputField.text,
                n = Int(s)
@@ -72,15 +29,8 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             outputField.text = String(output)
             processTrueVC.isChosen = flowchart.decision.evaluate(n) == true
             processFalseVC.isChosen = flowchart.decision.evaluate(n) == false
-            
         }
-
     }
-
-    var decisionVC: DecisionViewController!
-    var processTrueVC: ProcessViewController!
-    var processFalseVC: ProcessViewController!
-    var processLibraryVC: LibraryViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +38,7 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             v.layer.cornerRadius = 5.0
             v.layer.borderColor = UIColor.Steel.CGColor
             v.layer.borderWidth = 1.0
-            
         }
-
     }
 
     enum SegueIdentifier: String {
@@ -203,44 +151,72 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
                         title: self.flowchart.title
                     )
                 }
-
             }
-
             processLibraryVC = vc
         }
-
     }
+
+    var decisionVC: DecisionViewController!
+    var processTrueVC: ProcessViewController!
+    var processFalseVC: ProcessViewController!
+    var processLibraryVC: LibraryViewController!
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         self.view.endEditing(true)
     }
 
+    @IBAction func nameEditingDidEnd(sender: UITextField) {
+        if let title = sender.text where !title.isEmpty {
+            flowchart = Flowchart(
+                decision: flowchart.decision,
+                yes: flowchart.yes,
+                no: flowchart.no,
+                title: title)
+        }
+    }
+    @IBAction func addFlowchartAction(sender: UIButton) {
+
+        if Flowchart.store.filter({ $0.title == title }).count == 0 {
+            Flowchart.store.append(flowchart)
+            processLibraryVC.items[1].configurators = processLibraryVC.items[1].configurators + [flowchart]
+            processLibraryVC.tableView.reloadData()
+        }
+
+        decisionVC.updateUI()
+        processTrueVC.updateUI()
+        processFalseVC.updateUI()
+        nameField.text = "My New Flowchart"
+        inputField.text = "0"
+        decisionVC.decision = Decision.True
+        processTrueVC.block = Process.init(transformation: { x in x }, title: "Identity")
+        processFalseVC.block = Process.init(transformation: { x in x }, title: "Identity")
+
+        self.flowchart = Flowchart(
+            decision: Decision.True,
+            yes: Process(transformation: { x in x }, title: "Identity"),
+            no: Process(transformation: { x in x }, title: "Identity")
+        )
+
+    }
+
+
+    @IBAction func inputEditingDidEnd(sender: UITextField) {
+        evaluate()
+    }
+
+    // OUTLETS
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var inputField: UITextField!
+    @IBOutlet weak var outputField: UITextField!
     @IBOutlet weak var decisionLabel: UILabel!
     @IBOutlet weak var decisionInput: UITextField!
 
-    func setDecision(decision: Decision) {
-
-        guard let
-            s = decisionInput.text,
-            n = Int(s)
-            else { print(decisionInput.text); print(Int(decisionInput.text!)); return }
-        let newDecision: Decision
-        switch decision {
-        case .True:
-            return
-        case .IsEven:
-            return
-        case .IsEqualTo(_):
-            newDecision = .IsEqualTo(n)
-        case .IsGreaterThan(_):
-            newDecision = .IsGreaterThan(n)
-        case .IsLessThan(_):
-            newDecision = .IsLessThan(n)
-        }
-        self.flowchart = Flowchart(decision: newDecision, yes: flowchart.yes, no: flowchart.no)
-
-    }
+    @IBOutlet weak var processTrueView: UIView!
+    @IBOutlet weak var processFalseView: UIView!
+    
+    @IBOutlet weak var decisionLibrary: UIView!
+    @IBOutlet weak var processLibrary: UIView!
 
     private var activeProcess: ControlFlowDirection? {
         didSet {
@@ -272,16 +248,6 @@ class FlowChartViewController: UIViewController, SegueHandlerType {
             }
         }
     }
-
-
-    @IBOutlet weak var processTrueView: UIView!
-    @IBOutlet weak var processFalseView: UIView!
-    
-    @IBOutlet weak var decisionLibrary: UIView!
-    @IBOutlet weak var processLibrary: UIView!
-
-    @IBOutlet weak var yesLabel: UILabel!
-    @IBOutlet weak var noLabel: UILabel!
 
 }
 
