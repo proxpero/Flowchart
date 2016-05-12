@@ -23,7 +23,7 @@ public struct Flowchart: Block, CustomTitleConvertible {
     let yes: Block
     let no: Block
 
-    public init(decision: Decision, yes: Block, no: Block, title: String = "Flowchart") {
+    public init(decision: Decision, yes: Block, no: Block, title: String = "My Flowchart") {
         self.title = title
         self.decision = decision
         self.yes = yes
@@ -34,7 +34,7 @@ public struct Flowchart: Block, CustomTitleConvertible {
         return decision.evaluate(input) ? yes.transform(input) : no.transform(input)
     }
 
-    public static var store = Array<Flowchart>()
+    public static var store: Array<Flowchart> = []
 
 }
 
@@ -58,7 +58,8 @@ public struct Process: Block, CustomTitleConvertible {
         Process(transformation: { x in x - 1 }, title: "Decrement"),
         Process(transformation: { x in x * 2 }, title: "Double"),
         Process(transformation: { x in x * 3 }, title: "Triple"),
-        Process(transformation: { x in x * x }, title: "Square")
+        Process(transformation: { x in x * x }, title: "Square"),
+        Process(transformation: { x in x / 2 }, title: "Halve")
     ]
 
 }

@@ -45,9 +45,7 @@ public enum Decision: CustomTitleConvertible {
         case .IsGreaterThan(_):
             return "Is it greater than..."
         }
-
     }
-
 
     public func decisionWithValue(n: Int) -> Decision {
         switch self {
