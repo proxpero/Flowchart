@@ -8,8 +8,9 @@
 
 import Swift
 
-public enum Decision {
+public enum Decision: CustomTitleConvertible {
 
+    case True
     case IsEven
     case IsEqualTo(Int)
     case IsLessThan(Int)
@@ -17,6 +18,8 @@ public enum Decision {
 
     public func evaluate(input: Int) -> Bool {
         switch self {
+        case True:
+            return true
         case .IsEven:
             return input % 2 == 0
         case .IsEqualTo(let x):
@@ -29,16 +32,20 @@ public enum Decision {
     }
 
     public var title: String {
+        
         switch self {
+        case True:
+            return "True"
         case .IsEven:
-            return "Is Even?"
+            return "Is it even?"
         case .IsEqualTo(_):
-            return "Is Equal To?"
+            return "Is it equal to..."
         case .IsLessThan(_):
-            return "Is Less Than?"
+            return "Is it less than..."
         case .IsGreaterThan(_):
-            return "Is Greater Than?"
+            return "Is it greater than..."
         }
+
     }
 
 
@@ -67,117 +74,13 @@ public enum Decision {
             ()
         }
     }
+
+    static var store = [
+        Decision.True,
+        Decision.IsEven,
+        Decision.IsEqualTo(0),
+        Decision.IsLessThan(0),
+        Decision.IsGreaterThan(0)
+    ]
     
 }
-
-public struct Decision_ {
-
-    public let title: String
-
-    private let operation: (Int -> Bool)
-
-    public init(operation: Int -> Bool, title: String = "Decision") {
-        self.title = title
-        self.operation = operation
-    }
-
-    public func evaluate(input: Int) -> Bool {
-        return operation(input)
-    }
-
-}
-
-
-//public protocol DecisionType {
-//
-//    associatedtype T
-//
-//    var value: T { get }
-//    var op: (T) -> Bool { get }
-//
-//    func evaluation() -> Bool
-//
-//}
-//
-//extension DecisionType {
-//
-//    public func evaluation() -> Bool {
-//        return op(value)
-//    }
-//
-//}
-//
-//
-//
-//
-//public struct Decision<A>: DecisionType {
-//    public let value: A
-//    public let op: (A) -> Bool
-//
-//    public init(value: A, op: (A) -> Bool) {
-//        self.value = value
-//        self.op = op
-//    }
-//}
-//
-//extension DecisionType where T == Int {
-//
-//    func and(other: Self) -> Bool {
-//        return self.evaluation() && other.evaluation()
-//    }
-//
-//}
-//
-//public protocol OperatorType {
-//    associatedtype T
-//    var operation: (T) -> Bool { get }
-//}
-//
-//extension OperatorType where T == Decision<Int> {
-//
-//    func and(lhs: T, rhs: T) -> Bool {
-//        return lhs.evaluation() && rhs.evaluation()
-//    }
-//
-//}
-//
-//extension OperatorType where T: DecisionType {
-//
-//    func and(lhs: T, rhs: T) -> Bool {
-//        return lhs.evaluation() && rhs.evaluation()
-//    }
-//
-//    func or(lhs: T, rhs: T) -> Bool {
-//        return lhs.evaluation() || rhs.evaluation()
-//    }
-//
-//    
-//}
-//
-//
-//
-//public enum PrimitiveOperator: OperatorType {
-//
-//    case isEqualToZero
-//    case isEven
-//
-//    public var operation: (Int) -> Bool {
-//        switch self {
-//        case .isEqualToZero: return { x in x == 0 }
-//        case .isEven: return { x in x % 2 == 0 }
-//        }
-//    }
-//
-//}
-//
-//public enum CompositeOperator<A where A: DecisionType> {
-//
-//    case Not
-//
-//    public var operation: (A) -> Bool {
-//        switch self {
-//        case .Not: return { x in !x.evaluation() }
-//        }
-//    }
-//
-//}
