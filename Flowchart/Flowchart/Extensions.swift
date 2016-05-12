@@ -24,38 +24,3 @@ extension UIColor {
         )
     }
 }
-
-
-extension UIView {
-
-    var cornerRadius: Double {
-        get {
-            return Double(layer.cornerRadius)
-        }
-        set {
-            layer.cornerRadius = CGFloat(newValue)
-        }
-    }
-
-    var borderColor: UIColor? {
-        get {
-            return layer.borderColor != nil ? UIColor(CGColor: layer.borderColor!) : nil
-        }
-        set {
-            if newValue != nil {
-                layer.borderColor = newValue!.CGColor
-            }
-        }
-    }
-
-    var borderWidth: Double {
-        get {
-            return Double(layer.borderWidth)
-        }
-        set {
-            layer.borderWidth = CGFloat(newValue)
-        }
-    }
-    
-    
-}
