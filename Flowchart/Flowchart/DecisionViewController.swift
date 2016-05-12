@@ -22,6 +22,8 @@ class DecisionViewController: UIViewController {
     func updateUI() {
         label.text = decision.title
         switch decision! {
+        case .True:
+            inputField.hidden = true
         case .IsEven:
             inputField.hidden = true
         case .IsEqualTo(let x):
