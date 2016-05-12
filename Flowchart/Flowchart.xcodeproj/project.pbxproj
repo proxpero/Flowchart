@@ -13,14 +13,13 @@
 		5214F9871CE212E900E1A27A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5214F9851CE212E900E1A27A /* LaunchScreen.storyboard */; };
 		5214F9921CE212E900E1A27A /* FlowchartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214F9911CE212E900E1A27A /* FlowchartTests.swift */; };
 		5214F99D1CE2201400E1A27A /* FlowChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214F99C1CE2201400E1A27A /* FlowChartViewController.swift */; };
-		52663E4B1CE25A23006B9560 /* Flowchart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E481CE25A23006B9560 /* Flowchart.swift */; };
-		52663E4C1CE25A23006B9560 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E491CE25A23006B9560 /* Decision.swift */; };
-		52663E4D1CE25A23006B9560 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E4A1CE25A23006B9560 /* Operator.swift */; };
 		52663E4F1CE25F27006B9560 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E4E1CE25F27006B9560 /* LibraryViewController.swift */; };
 		52663E511CE26D44006B9560 /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E501CE26D44006B9560 /* SegueHandlerType.swift */; };
 		52663E531CE2C71B006B9560 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E521CE2C71B006B9560 /* Extensions.swift */; };
 		52663E551CE38CE6006B9560 /* DecisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E541CE38CE6006B9560 /* DecisionViewController.swift */; };
 		52663E571CE38CFE006B9560 /* ProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E561CE38CFE006B9560 /* ProcessViewController.swift */; };
+		52663E601CE44181006B9560 /* Decision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E5E1CE44181006B9560 /* Decision.swift */; };
+		52663E611CE44181006B9560 /* Flowchart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52663E5F1CE44181006B9560 /* Flowchart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,14 +43,13 @@
 		5214F9911CE212E900E1A27A /* FlowchartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowchartTests.swift; sourceTree = "<group>"; };
 		5214F9931CE212E900E1A27A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5214F99C1CE2201400E1A27A /* FlowChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowChartViewController.swift; sourceTree = "<group>"; };
-		52663E481CE25A23006B9560 /* Flowchart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Flowchart.swift; path = ../../FlowchartLogic/FlowchartLogic/Flowchart.swift; sourceTree = "<group>"; };
-		52663E491CE25A23006B9560 /* Decision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Decision.swift; path = ../../FlowchartLogic/FlowchartLogic/Decision.swift; sourceTree = "<group>"; };
-		52663E4A1CE25A23006B9560 /* Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operator.swift; path = ../../FlowchartLogic/FlowchartLogic/Operator.swift; sourceTree = "<group>"; };
 		52663E4E1CE25F27006B9560 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		52663E501CE26D44006B9560 /* SegueHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
 		52663E521CE2C71B006B9560 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		52663E541CE38CE6006B9560 /* DecisionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecisionViewController.swift; sourceTree = "<group>"; };
 		52663E561CE38CFE006B9560 /* ProcessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessViewController.swift; sourceTree = "<group>"; };
+		52663E5E1CE44181006B9560 /* Decision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decision.swift; sourceTree = "<group>"; };
+		52663E5F1CE44181006B9560 /* Flowchart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flowchart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,10 +91,9 @@
 		5214F97B1CE212E900E1A27A /* Flowchart */ = {
 			isa = PBXGroup;
 			children = (
-				52663E481CE25A23006B9560 /* Flowchart.swift */,
-				52663E491CE25A23006B9560 /* Decision.swift */,
-				52663E4A1CE25A23006B9560 /* Operator.swift */,
 				5214F97C1CE212E900E1A27A /* AppDelegate.swift */,
+				52663E5E1CE44181006B9560 /* Decision.swift */,
+				52663E5F1CE44181006B9560 /* Flowchart.swift */,
 				5214F99C1CE2201400E1A27A /* FlowChartViewController.swift */,
 				52663E541CE38CE6006B9560 /* DecisionViewController.swift */,
 				52663E561CE38CFE006B9560 /* ProcessViewController.swift */,
@@ -222,15 +219,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5214F97D1CE212E900E1A27A /* AppDelegate.swift in Sources */,
+				52663E611CE44181006B9560 /* Flowchart.swift in Sources */,
 				52663E551CE38CE6006B9560 /* DecisionViewController.swift in Sources */,
-				52663E4B1CE25A23006B9560 /* Flowchart.swift in Sources */,
 				52663E4F1CE25F27006B9560 /* LibraryViewController.swift in Sources */,
 				52663E531CE2C71B006B9560 /* Extensions.swift in Sources */,
-				52663E4D1CE25A23006B9560 /* Operator.swift in Sources */,
 				52663E571CE38CFE006B9560 /* ProcessViewController.swift in Sources */,
 				5214F99D1CE2201400E1A27A /* FlowChartViewController.swift in Sources */,
-				52663E4C1CE25A23006B9560 /* Decision.swift in Sources */,
 				52663E511CE26D44006B9560 /* SegueHandlerType.swift in Sources */,
+				52663E601CE44181006B9560 /* Decision.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
